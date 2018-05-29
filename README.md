@@ -15,3 +15,9 @@ A job application tracker that allows you to track your job applications in an i
 - SCSS
 - JavaScript
 - Vue.js
+
+### Chingu Team Members
+
+- Team Leader - Lennyroy (Front-end) //Update Your Information
+- Team Member - Aaron (Back-end)  //Update Your Information
+- Team Member - Alexander Garcia (Front-end and Back-end)
