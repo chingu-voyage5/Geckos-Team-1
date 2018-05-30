@@ -2,15 +2,32 @@
   <nav id="nav">
     <router-link to="/">Home</router-link>
     <div class='nav--link__group'>
-      <router-link to="/login" class='link--login'>Login</router-link>
-      <router-link to="/register" class='link--register'>Register</router-link>
+      <router-link to="/dashboard" v-if="user">Dashboard</router-link>
+      <router-link to="/login" class='link--login' v-if="!user">Login</router-link>
+      <router-link to="/register" class='link--register' v-if="!user">Register</router-link>
+      <a class='link' @click="signOut" v-if="user">Sign Out</a>
     </div>
   </nav>
 </template>
 
 <script>
+import firebase from 'firebase';
 export default {
-
+  computed: {
+    user() {
+      return this.$store.getters.getUser;
+    }
+  },
+  methods: {
+    signOut() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace("login");
+        });
+    }
+  }
 }
 </script>
 

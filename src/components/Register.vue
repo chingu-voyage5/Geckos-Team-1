@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import firebase from '../firebase.js'
+import firebase from "firebase";
 
 export default {
   name: "Register",
@@ -38,16 +38,19 @@ export default {
       const email = vm.data.email;
       const pass = vm.data.email;
       //Firebase Login
-      firebase.auth().createUserWithEmailAndPassword(email, pass)
-        .catch(function(err) {
-          console.error(`Error code ${err.code}: ${err.message}`)
-          vm.success = false;
-          vm.notification = 'Failed to Register User'
-        })
-
-      //Notification Displays Success
-      vm.success = true;
-      vm.notification = 'Successfully Registered User. Please Login!'
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(email, pass)
+        .then(
+          user => {
+            this.$router.replace('dashboard');
+          },
+          error => {
+            console.error(`Error code ${error.code}: ${error.message}`)
+            vm.success = false;
+            vm.notification = `${error.message}`
+          }
+        )
     }
   }
 }
