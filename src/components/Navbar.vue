@@ -1,11 +1,11 @@
 <template>
   <nav id="nav">
-    <router-link to="/">Home</router-link>
+    <router-link class='brand' to="/">AppTrackr</router-link>
     <div class='nav--link__group'>
-      <router-link to="/dashboard" v-if="user">Dashboard</router-link>
+      <router-link to="/dashboard" class='link--dashboard' v-if="user">Dashboard</router-link>
       <router-link to="/login" class='link--login' v-if="!user">Login</router-link>
       <router-link to="/register" class='link--register' v-if="!user">Register</router-link>
-      <a class='link' @click="signOut" v-if="user">Sign Out</a>
+      <a class='link--logout' @click="signOut"  v-if="user">Sign Out</a>
     </div>
   </nav>
 </template>
@@ -36,26 +36,34 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     height: 100%;
   }
   .nav--link__group {
 
     > a {
-      padding: 20px;
-      margin-right: 10px;
+      padding: 9px 12px;
+      margin-left: 10px;
       box-shadow: 2px 2px 4px rgba(12,12,13,0.1);
       color: #000;
-      font-size: 1.2rem;
+      font-size: 1.12rem;
       text-decoration: none;
     }
   }
 
-  .link--login {
+  .link--login, .link--dashboard {
     background-color: lightgreen;
   }
-  .link--register {
+  .link--register, .link--logout {
     background-color: lightcyan;
+    cursor: pointer;
+  }
+  .brand {
+    text-decoration: none;
+    color: #000;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 1.4px;
   }
 </style>

@@ -1,18 +1,21 @@
 <template>
   <section id="register">
-    <h2>Register</h2>
-    <span class='notification'
-      v-if="success"
-    >{{notification}}</span>
     <form>
+      <h2>Register</h2>
+      <span class='notification'
+      v-if="success"
+      >{{notification}}</span>
       <label>E-mail:</label>
-      <input type='email' required placeholder='bob@example.com' v-model='data.email'>
+      <input type='email' required placeholder='E-mail' v-model='data.email'>
       <label>Password:</label>
-      <input type='password' required v-model='data.password'>
-      <button role='button' class='btn btn--register'
-        @click.prevent='registerUser'>
-        Register
-      </button>
+      <input type='password' required placeholder='Password' v-model='data.password'>
+      <div class='login--section'>
+        <router-link to="/login">Already signed up? Login in here</router-link>
+        <button role='button' class='btn btn--register'
+          @click.prevent='registerUser'>
+          Register
+        </button>
+      </div>
     </form>
   </section>
 </template>
@@ -43,10 +46,12 @@ export default {
         .createUserWithEmailAndPassword(email, pass)
         .then(
           user => {
+            swal("success", "ok")
             this.$router.replace('dashboard');
           },
           error => {
             console.error(`Error code ${error.code}: ${error.message}`)
+            swal("Error", `${error.message}`, "error")
             vm.success = false;
             vm.notification = `${error.message}`
           }
@@ -57,14 +62,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  h2 {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 3.2rem;
-    color: goldenrod;
+ h2 {
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
+    font-size: 2.8rem;
+    color: #5fcfcb;
+    text-align: center;
+    margin-bottom: 42px;
+    letter-spacing: 2.8px;
+    font-variant-caps: all-small-caps;
   }
-  #register {
+  #login {
     height: 100%;
-    min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -72,17 +80,31 @@ export default {
     align-items: center;
   }
   form {
-    max-width: 70%;
+    width: 70%;
+    background-color: #fff;
+    padding: 15px 15px 30px 15px;
+    margin: 55px auto;
+    box-shadow: 4px 4px 16px rgba(12,12,13,0.1);
+
+    @media screen and (min-width: 800px) {
+      width: 50%;
+    }
   }
   label, input {
     width: 90%;
     margin: 0 auto;
     padding: 10px;
     margin: 12px;
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
   }
   label {
     font-size: 1.3rem;
-    font-family: 'Arial', Arial, Helvetica, sans-serif;
+    font-family: 'Raleway', Arial, Helvetica, sans-serif;
+  }
+  input {
+    border: 0;
+    border-bottom: 1px solid rgba(12,12,13,0.1);
+    outline: none;
   }
   .btn {
     padding: 10px 20px;
@@ -101,4 +123,19 @@ export default {
     }
   }
 
+  .login--section {
+    display: flex;
+    flex-direction: column;
+
+    > a {
+      padding-left: 12px;
+      padding-bottom: 12px;
+      text-decoration: none;
+      color: #669999;
+    }
+  }
+
+  .notifications {
+    color: red;
+  }
 </style>
