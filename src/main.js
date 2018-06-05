@@ -1,3 +1,6 @@
+//CSS Main.scss import
+import "./assets/main.scss";
+
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Firebase from "firebase";
@@ -40,7 +43,7 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
 
   if (requiresAuth && !currentUser) {
-    next('/login');
+    next("/login");
   } else if (requiresAuth && currentUser) {
     next();
   } else {

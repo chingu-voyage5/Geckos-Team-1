@@ -1,5 +1,25 @@
 //Main Color Scheme Variables
-
+$main-blue: #5fcfcb;
 //Mobile, Tablet, Laptop, Desktop sizes
 
 //Global CSS
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: 'Raleway', Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 1.4;
+  background-color: $main-blue;
+}
+
+h1 {
+  font-size: 5rem;
+  text-align: center;
+  margin: 0;
+}
